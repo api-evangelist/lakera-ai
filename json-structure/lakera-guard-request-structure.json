@@ -1,0 +1,48 @@
+{
+  "title": "Lakera Guard Request Structure",
+  "description": "Documents the structural composition of a Lakera Guard /v2/guard request body.",
+  "type": "object",
+  "structure": {
+    "messages": {
+      "kind": "array",
+      "of": "Message",
+      "description": "Ordered list of chat messages following the OpenAI chat completions format."
+    },
+    "Message": {
+      "kind": "object",
+      "fields": {
+        "role": "enum<system|user|assistant|tool>",
+        "content": "string"
+      }
+    },
+    "project_id": {
+      "kind": "string",
+      "optional": true,
+      "description": "Project identifier whose assigned policy governs screening."
+    },
+    "policy_id": {
+      "kind": "string",
+      "optional": true,
+      "description": "Explicit policy override."
+    },
+    "breakdown": {
+      "kind": "boolean",
+      "optional": true,
+      "default": false
+    },
+    "payload": {
+      "kind": "boolean",
+      "optional": true,
+      "default": false
+    },
+    "dev_info": {
+      "kind": "object",
+      "optional": true
+    }
+  },
+  "notes": [
+    "Guard screens the LAST interaction in the messages array against the resolved policy.",
+    "Setting breakdown=true returns per-detector results; setting payload=true returns match locations for masking.",
+    "If neither project_id nor policy_id is supplied, the organization's default policy applies."
+  ]
+}

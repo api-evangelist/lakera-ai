@@ -1,0 +1,125 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lakera Guard — Content Screening
+  description: 'Lakera Guard — Content Screening. 2 operations. Lead operation: Screen Content For Threats. Self-contained
+    Naftiko capability covering the Lakera Guard runtime screening surface.'
+  tags:
+  - Lakera
+  - Guard
+  - AI Security
+  - Prompt Injection
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    LAKERA_GUARD_API_KEY: LAKERA_GUARD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: guard-screening
+    baseUri: https://api.lakera.ai/v2
+    description: Lakera Guard content screening capability. Self-contained, no shared references.
+    resources:
+    - name: guard
+      path: /guard
+      operations:
+      - name: screenContent
+        method: POST
+        description: Screen Content For Threats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON) with messages, optional project_id, policy_id, breakdown, payload.
+          required: true
+    - name: guard-results
+      path: /guard/results
+      operations:
+      - name: getResults
+        method: POST
+        description: Get Detector Confidence Results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON) with messages and optional project_id.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.LAKERA_GUARD_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: guard-screening-rest
+    port: 8080
+    description: REST adapter for Lakera Guard content screening. One Spectral-compliant resource per consumed
+      operation, prefixed with /v2.
+    resources:
+    - path: /v2/guard
+      name: guard
+      description: REST surface for /guard.
+      operations:
+      - method: POST
+        name: screenContent
+        description: Screen Content For Threats
+        call: guard-screening.screenContent
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/guard/results
+      name: guard-results
+      description: REST surface for /guard/results.
+      operations:
+      - method: POST
+        name: getResults
+        description: Get Detector Confidence Results
+        call: guard-screening.getResults
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: guard-screening-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lakera Guard content screening. One tool per consumed operation.
+    tools:
+    - name: lakera-screen-content
+      description: Screen LLM messages for prompt attacks, data leakage, content violations, PII, and malicious links.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: guard-screening.screenContent
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lakera-get-detector-results
+      description: Retrieve Lakera detector confidence levels for offline threshold tuning and quality monitoring.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: guard-screening.getResults
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

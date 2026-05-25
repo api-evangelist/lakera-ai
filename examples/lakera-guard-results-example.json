@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.lakera.ai/v2/guard/results",
+    "headers": {
+      "Authorization": "Bearer $LAKERA_GUARD_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "My SSN is 123-45-6789 and my email is jane@example.com."
+        }
+      ],
+      "project_id": "project_pii_tuning"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "results": [
+        {
+          "detector_type": "pii",
+          "detected": true,
+          "confidence": "L1"
+        },
+        {
+          "detector_type": "prompt_attack",
+          "detected": false,
+          "confidence": "L5"
+        }
+      ],
+      "metadata": {
+        "request_uuid": "4f1c91ad-3a4e-4d2b-8d80-af44ca72e975"
+      }
+    }
+  }
+}

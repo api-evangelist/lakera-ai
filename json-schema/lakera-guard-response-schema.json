@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lakera-ai/main/json-schema/lakera-guard-response-schema.json",
+  "title": "Lakera Guard Response",
+  "description": "Response payload from the Lakera Guard /v2/guard screening endpoint.",
+  "type": "object",
+  "required": ["flagged", "metadata"],
+  "properties": {
+    "flagged": {
+      "type": "boolean",
+      "description": "True if any active detector tripped under the resolved policy."
+    },
+    "breakdown": {
+      "type": "array",
+      "description": "Per-detector results when `breakdown` was true in the request.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "detector_type": {
+            "type": "string",
+            "description": "Detector category (prompt_attack, pii, content_moderation, unknown_links, custom)."
+          },
+          "detected": { "type": "boolean" },
+          "confidence": {
+            "type": "string",
+            "enum": ["L1", "L2", "L3", "L4", "L5"],
+            "description": "L1 Confident through L5 Unlikely."
+          }
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Match locations for PII and profanity when `payload` was true."
+    },
+    "dev_info": { "type": "object" },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "request_uuid": {
+          "type": "string",
+          "description": "Unique identifier for the screening request."
+        }
+      }
+    }
+  }
+}

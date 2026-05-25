@@ -1,0 +1,42 @@
+name: Lakera AI Rate Limits
+description: API Commons Rate Limits 0.1 representation of Lakera Guard SaaS rate-limit policies. Specific
+  numerical limits are not publicly published; figures below represent publicly-documented design targets.
+specVersion: '0.1'
+modified: '2026-05-25'
+sources:
+  - https://docs.lakera.ai/docs/api
+  - https://www.lakera.ai/
+policies:
+  - id: guard-saas-design-target
+    name: Lakera Guard SaaS Design Target
+    description: Lakera markets Guard as scaling to "hundreds of prompts per second" with sub-50ms p95 latency.
+      Hard per-key limits and burst behavior are negotiated by plan and are not publicly published.
+    scope:
+      product: Lakera Guard SaaS
+      surface: /v2/guard
+    targets:
+      - dimension: latency_p95_ms
+        value: 50
+        description: Sub-50ms runtime latency target for prompt screening.
+      - dimension: throughput_rps
+        value: 100
+        description: Hundreds of prompts per second per organization (design target, plan dependent).
+    enforcement:
+      response: 429 Too Many Requests
+      headers:
+        - Retry-After
+    notes:
+      - Free trial accounts have a substantially lower rps and daily request cap.
+      - Enterprise contracts include negotiated rate envelopes and burst headroom.
+      - Self-hosted deployments are not rate-limited by Lakera; capacity is sized by the customer.
+  - id: guard-results-low-volume
+    name: Guard Results Endpoint (Analysis)
+    description: The /v2/guard/results endpoint is intended for offline analysis and threshold tuning, not for
+      runtime decisions. Lakera applies tighter limits to discourage runtime use.
+    scope:
+      surface: /v2/guard/results
+    enforcement:
+      response: 429 Too Many Requests
+    notes:
+      - Requests to /v2/guard/results do not contribute to runtime screening logs.
+      - Not recommended for production GenAI security decisions.

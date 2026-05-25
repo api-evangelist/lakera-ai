@@ -1,0 +1,60 @@
+name: Lakera AI Vocabulary
+description: Domain vocabulary for Lakera AI security platform, covering Lakera Guard, AI Red Teaming, and the
+  underlying detector taxonomy.
+modified: '2026-05-25'
+terms:
+  - term: Lakera Guard
+    definition: Runtime AI security service that screens LLM application inputs and outputs against configured
+      detectors and policies, returning a flagged decision in sub-50ms.
+  - term: Lakera Red
+    definition: AI red-teaming product that runs direct and indirect attack simulations against GenAI applications
+      and produces risk-based vulnerability findings with remediation guidance.
+  - term: AI Agent Security
+    definition: Lakera product line providing runtime protection for autonomous agents — prompt attack prevention,
+      tool-use guardrails, and data leakage controls.
+  - term: Workforce AI Security
+    definition: Lakera product line monitoring employee AI usage across applications and browsers with
+      context-aware data protection and policy controls.
+  - term: Gandalf
+    definition: Lakera's educational prompt-injection challenge game (1M+ players) used both as community outreach
+      and as a continuous source of attack signal for the detector models.
+  - term: Detector
+    definition: An atomic threat-detection model invoked by Lakera Guard. Categories include prompt_attack, pii,
+      content_moderation, unknown_links, and custom organization-defined detectors.
+  - term: Prompt Attack Detector
+    definition: Detector that identifies prompt injections, jailbreaks, and instruction-override attempts mapped to
+      OWASP LLM01.
+  - term: PII Detector
+    definition: Detector that identifies personally identifiable information in prompts and responses, mapped to
+      OWASP LLM06 (Sensitive Information Disclosure).
+  - term: Content Moderation Detector
+    definition: Detector that identifies offensive, hateful, sexual, violent, or vulgar content in prompts or
+      responses.
+  - term: Unknown Link Detector
+    definition: Detector that flags URLs falling outside an allow-list of approved domains to prevent phishing and
+      data exfiltration.
+  - term: Policy
+    definition: A reusable definition of which detectors to apply, at what sensitivity (L1-L5), and what action to
+      take (flag, mask, allow). Policies can be selected from the Lakera catalog or authored as custom policies.
+  - term: Project
+    definition: A binding of an application or workload to a single policy and API key scope. Each protected
+      application gets its own project so that detector behavior, analytics, and budget can be reasoned about
+      per-application.
+  - term: Confidence Level
+    definition: Standardized scale used by Lakera detectors. L1 Confident, L2 Very Likely, L3 Likely, L4 Less
+      Likely, L5 Unlikely — aligned with OWASP paranoia level conventions.
+  - term: Breakdown
+    definition: Per-detector flagging detail returned by /v2/guard when the request includes `breakdown=true`.
+      Allows applications to make detector-specific decisions and surface explanations.
+  - term: Payload
+    definition: Character-level match locations for PII and profanity returned by /v2/guard when
+      `payload=true`. Enables masking of detected spans rather than full-message rejection.
+  - term: SaaS Deployment
+    definition: Lakera-hosted multi-tenant deployment of Guard with a web UI, automated policy management, daily
+      model updates, and real-time analytics. API keys required.
+  - term: Self-Hosted Deployment
+    definition: Customer-managed on-prem or in-VPC deployment of Guard. JSON-based configuration, customer-managed
+      scaling, bi-weekly model updates. No authentication required at the API surface.
+  - term: Regional Endpoint
+    definition: Geographically-pinned Lakera Guard SaaS endpoint — US, US East, US West, EU West, Asia Pacific —
+      offered for latency and data residency.

@@ -1,0 +1,46 @@
+name: Lakera AI FinOps
+description: FinOps Framework / FOCUS-aligned representation of Lakera Guard's commercial billing surface.
+specVersion: '0.1'
+focusVersion: '1.1'
+modified: '2026-05-25'
+provider:
+  name: Lakera
+  url: https://www.lakera.ai
+  parent: Check Point Software Technologies Ltd.
+billingSurface:
+  model: Subscription
+  meteringDimensions:
+    - name: organization-seats
+      description: Number of seats / users authorized in the Lakera platform UI.
+    - name: protected-applications
+      description: Number of projects (protected applications) under management.
+    - name: screening-requests
+      description: Number of /v2/guard screening calls made against Lakera Guard SaaS, aggregated per project.
+    - name: detector-categories
+      description: Number of detector categories enabled in the active policy (prompt_attack, pii,
+        content_moderation, unknown_links, custom).
+  currency: USD
+  invoicing:
+    - period: Monthly
+    - period: Annual
+  publicPricing: false
+  notes:
+    - Lakera does not publish per-request pricing on its public website. Plans are quoted by sales.
+    - The Free Trial tier does not incur charges but is request-capped.
+    - Enterprise contracts may include negotiated overage terms when screening-request volume exceeds the
+      contracted envelope.
+focusFields:
+  - field: ServiceCategory
+    value: AI and Machine Learning
+  - field: ServiceName
+    value: Lakera Guard
+  - field: ChargeCategory
+    value: Usage
+  - field: ChargeFrequency
+    value: Recurring
+  - field: PricingCategory
+    value: Subscription
+  - field: BillingPeriodStart
+    description: Calendar month or contract anniversary depending on plan.
+  - field: BillingPeriodEnd
+    description: Calendar month or contract anniversary depending on plan.

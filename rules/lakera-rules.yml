@@ -1,0 +1,41 @@
+extends:
+  - spectral:oas
+rules:
+  operation-summary-title-case:
+    description: Operation summaries should be in Title Case.
+    severity: warn
+    given: "$.paths.*[get,post,put,delete,patch]"
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)(\\s+[A-Z][a-zA-Z0-9]*)*$"
+  operation-must-have-tags:
+    description: Every operation must have at least one tag (Guard, Results, Policies, Projects).
+    severity: error
+    given: "$.paths.*[get,post,put,delete,patch]"
+    then:
+      field: tags
+      function: truthy
+  operation-must-have-description:
+    description: Every operation must include a description that explains intent and detector behavior.
+    severity: warn
+    given: "$.paths.*[get,post,put,delete,patch]"
+    then:
+      field: description
+      function: truthy
+  lakera-server-must-use-versioned-base:
+    description: Lakera servers must use a /v2 versioned base path.
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v[0-9]+$"
+  lakera-security-bearer-required:
+    description: Lakera APIs must use Bearer token authentication.
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: BearerAuth
+      function: truthy

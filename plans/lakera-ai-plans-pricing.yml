@@ -1,0 +1,86 @@
+name: Lakera AI Plans and Pricing
+description: API Commons Plans 0.1 representation of Lakera AI's commercial plans for Lakera Guard SaaS. Detailed
+  pricing is not published publicly; tiers below reflect publicly-documented packaging.
+specVersion: '0.1'
+modified: '2026-05-25'
+plans:
+  - id: free-trial
+    name: Free Trial
+    description: Time-limited evaluation tier providing access to Lakera Guard SaaS for non-production
+      experimentation. Includes a default policy covering prompt attacks, PII, content moderation, and unknown
+      links. Subject to a fair-use request cap and rate limit.
+    entries:
+      - geo: GLOBAL
+        unit: 1
+        label: Trial
+        price: Free
+        metric: organization
+        timeFrame: month
+        description: Free evaluation access to Lakera Guard SaaS for non-production workloads.
+    elements:
+      - name: Lakera Guard SaaS access
+      - name: Default Lakera Guard policy
+      - name: Single project
+      - name: Community support
+  - id: business
+    name: Business
+    description: Production-grade Lakera Guard SaaS plan for individual applications and small teams. Includes
+      custom policies, multiple projects, daily detector model updates, real-time analytics, and standard support.
+      Pricing is custom — contact Lakera sales.
+    entries:
+      - geo: GLOBAL
+        unit: 1
+        label: Subscription
+        price: Call
+        metric: organization
+        timeFrame: month
+        description: Custom-priced subscription for production workloads. Contact Lakera for quote.
+    elements:
+      - name: Lakera Guard SaaS access (production)
+      - name: Custom policies and projects
+      - name: Daily detector model updates
+      - name: Real-time analytics dashboard
+      - name: Standard support
+      - name: Regional endpoints (US, EU, APAC)
+  - id: enterprise
+    name: Enterprise
+    description: Full Lakera platform for enterprise GenAI security programs. Includes Platform API access
+      (policies and projects management), Workforce AI Security, AI Agent Security, AI Red Teaming, SSO/SCIM,
+      audit logs, dedicated support, and SLAs. Optional self-hosted deployment in customer VPC. Pricing is custom.
+    entries:
+      - geo: GLOBAL
+        unit: 1
+        label: Subscription
+        price: Call
+        metric: organization
+        timeFrame: year
+        description: Annual enterprise contract.
+    elements:
+      - name: Lakera Guard SaaS or Self-Hosted
+      - name: Platform API access (policies, projects)
+      - name: Workforce AI Security
+      - name: AI Agent Security
+      - name: AI Red Teaming engagements
+      - name: SSO and SCIM
+      - name: Audit logs
+      - name: Dedicated solution engineering
+      - name: Production SLA
+  - id: self-hosted
+    name: Self-Hosted
+    description: Customer-managed deployment of Lakera Guard inside the customer VPC or on-prem. No API key
+      required at the API surface — authentication is handled by customer infrastructure. Bi-weekly detector
+      updates delivered via container image. Available as part of Enterprise.
+    entries:
+      - geo: GLOBAL
+        unit: 1
+        label: Deployment
+        price: Call
+        metric: deployment
+        timeFrame: year
+        description: Bundled with Enterprise; contact Lakera for standalone pricing.
+    elements:
+      - name: On-prem or customer-VPC deployment
+      - name: Bi-weekly detector image updates
+      - name: Customer-managed scaling
+      - name: Kubernetes startup, readiness, and liveness probes
+      - name: Policy lint and health endpoints
