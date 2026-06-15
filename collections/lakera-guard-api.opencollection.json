@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lakera Guard API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Guard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Screen Content For Threats",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lakera.ai/v2/guard",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Screens the last interaction in an OpenAI-style messages array against\nthe policy associated with the supplied project or policy ID. Returns a\n`flagged` boolean indicating whether any configured detector tripped.\nWhen `breakdown` is true the response includes per-detector results, and\nwhen `payload` is true the response includes character-level match\nlocations for masking sensitive content.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Detector Confidence Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lakera.ai/v2/guard/results",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns detector confidence levels (L1 Confident through L5 Unlikely) for\nthe supplied content without making a runtime flagging decision and\nwithout contributing to logged screening activity. Intended for offline\nanalysis, threshold tuning, and quality monitoring rather than runtime\nenforcement.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
