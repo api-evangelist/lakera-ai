@@ -29,9 +29,9 @@ apis:
       - url: json-ld/lakera-ai-context.jsonld
         type: JSONLD
       - url: examples/lakera-guard-screen-content-example.json
-        type: Example
+        type: Examples
       - url: examples/lakera-guard-results-example.json
-        type: Example
+        type: Examples
     description: >-
       Lakera Guard's runtime screening API. POST OpenAI-style chat messages to /v2/guard and receive a `flagged`
       decision based on the policy assigned to the project, with optional per-detector breakdown and payload-level
@@ -125,25 +125,25 @@ common:
     type: GitHubOrganization
   - url: https://github.com/lakeraai/pint-benchmark
     name: PINT Benchmark
-    type: Tool
+    type: Tools
   - url: https://github.com/lakeraai/guard-demo-client
     name: Lakera Guard Demo Client (Python)
     type: CodeExamples
   - url: https://github.com/lakeraai/chrome-extension
     name: Lakera Chrome Extension (ChatGPT Data Leak Protection)
-    type: Tool
+    type: Tools
   - url: https://github.com/lakeraai/canica
     name: Canica Text Embedding Viewer
-    type: Tool
+    type: Tools
   - url: https://github.com/lakeraai/dsec-gandalf
     name: dsec-gandalf
-    type: Tool
+    type: Tools
   - url: https://github.com/lakeraai/intent-augmentation
     name: Intent Augmentation
-    type: Tool
+    type: Tools
   - url: https://docs.litellm.ai/docs/proxy/guardrails/lakera_ai
     name: LiteLLM Lakera Guardrail
-    type: Integration
+    type: Integrations
   - url: plans/lakera-ai-plans-pricing.yml
     type: Plans
   - url: rate-limits/lakera-ai-rate-limits.yml
