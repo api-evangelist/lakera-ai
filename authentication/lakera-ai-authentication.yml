@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/lakera-guard-api-openapi.yml, openapi/lakera-platform-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API Key
+  description: |-
+    Lakera Guard SaaS API key issued from the Lakera platform. Pass as
+    `Authorization: Bearer $LAKERA_GUARD_API_KEY`. Self-hosted deployments
+    may run without authentication.
+  sources:
+  - openapi/lakera-guard-api-openapi.yml
+  - openapi/lakera-platform-api-openapi.yml

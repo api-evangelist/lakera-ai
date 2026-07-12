@@ -1,0 +1,12 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.lakera.ai/security
+url: https://www.lakera.ai/security
+certifications:
+- GDPR
+evidence:
+- source: https://www.lakera.ai/security
+  keywords:
+  - trust center
+  - gdpr

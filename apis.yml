@@ -74,6 +74,14 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: TrustCenter
+    url: security/lakera-ai-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/lakera-ai-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/lakera-ai-domain-security.yml
+  - type: Authentication
+    url: authentication/lakera-ai-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/lakeraai
   - url: https://www.lakera.ai
