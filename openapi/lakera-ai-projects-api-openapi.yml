@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: Lakera Guard Projects API
+  description: 'Lakera Guard is an AI-native security platform that screens LLM application
+
+    inputs and outputs for prompt attacks, data leakage, content violations, PII
+
+    exposure, and malicious links. The Guard API exposes a single screening
+
+    endpoint that accepts OpenAI-style chat messages and returns a flagged
+
+    response, plus a results endpoint that returns detector confidence levels
+
+    without making a runtime decision.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Lakera
+    url: https://www.lakera.ai
+    email: support@lakera.ai
+  license:
+    name: Lakera Terms of Service
+    url: https://www.lakera.ai/terms
+servers:
+- url: https://api.lakera.ai/v2
+  description: Lakera Guard SaaS (Global)
+- url: https://api.us-east.lakera.ai/v2
+  description: Lakera Guard SaaS (US East)
+- url: https://api.us-west.lakera.ai/v2
+  description: Lakera Guard SaaS (US West)
+- url: https://api.eu-west.lakera.ai/v2
+  description: Lakera Guard SaaS (EU West)
+- url: https://api.ap.lakera.ai/v2
+  description: Lakera Guard SaaS (Asia Pacific)
+security:
+- BearerAuth: []
+tags:
+- name: Projects
+  description: Create and manage projects bound to policies.
+paths:
+  /projects:
+    get:
+      summary: List Projects
+      operationId: listProjects
+      tags:
+      - Projects
+      responses:
+        '200':
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+    post:
+      summary: Create Project
+      operationId: createProject
+      tags:
+      - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectInput'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+  /projects/{project_id}:
+    parameters:
+    - in: path
+      name: project_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Project
+      operationId: getProject
+      tags:
+      - Projects
+      responses:
+        '200':
+          description: Project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+    put:
+      summary: Update Project
+      operationId: updateProject
+      tags:
+      - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectInput'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+    delete:
+      summary: Delete Project
+      operationId: deleteProject
+      tags:
+      - Projects
+      responses:
+        '204':
+          description: Deleted
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        policy_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    ProjectInput:
+      type: object
+      required:
+      - name
+      - policy_id
+      properties:
+        name:
+          type: string
+        policy_id:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'Lakera Guard SaaS API key issued from the Lakera platform. Pass as
+
+        `Authorization: Bearer $LAKERA_GUARD_API_KEY`. Self-hosted deployments
+
+        may run without authentication.
+
+        '

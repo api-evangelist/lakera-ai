@@ -1,0 +1,194 @@
+openapi: 3.1.0
+info:
+  title: Lakera Guard Policies API
+  description: 'Lakera Guard is an AI-native security platform that screens LLM application
+
+    inputs and outputs for prompt attacks, data leakage, content violations, PII
+
+    exposure, and malicious links. The Guard API exposes a single screening
+
+    endpoint that accepts OpenAI-style chat messages and returns a flagged
+
+    response, plus a results endpoint that returns detector confidence levels
+
+    without making a runtime decision.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Lakera
+    url: https://www.lakera.ai
+    email: support@lakera.ai
+  license:
+    name: Lakera Terms of Service
+    url: https://www.lakera.ai/terms
+servers:
+- url: https://api.lakera.ai/v2
+  description: Lakera Guard SaaS (Global)
+- url: https://api.us-east.lakera.ai/v2
+  description: Lakera Guard SaaS (US East)
+- url: https://api.us-west.lakera.ai/v2
+  description: Lakera Guard SaaS (US West)
+- url: https://api.eu-west.lakera.ai/v2
+  description: Lakera Guard SaaS (EU West)
+- url: https://api.ap.lakera.ai/v2
+  description: Lakera Guard SaaS (Asia Pacific)
+security:
+- BearerAuth: []
+tags:
+- name: Policies
+  description: Create and manage Lakera Guard policies.
+paths:
+  /policies:
+    get:
+      summary: List Policies
+      description: List policies available to the authenticated organization.
+      operationId: listPolicies
+      tags:
+      - Policies
+      responses:
+        '200':
+          description: List of policies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Policy'
+    post:
+      summary: Create Policy
+      description: Create a new Lakera Guard policy that selects detectors and sensitivity.
+      operationId: createPolicy
+      tags:
+      - Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyInput'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+  /policies/{policy_id}:
+    parameters:
+    - in: path
+      name: policy_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Policy
+      operationId: getPolicy
+      tags:
+      - Policies
+      responses:
+        '200':
+          description: Policy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+    put:
+      summary: Update Policy
+      operationId: updatePolicy
+      tags:
+      - Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyInput'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+    delete:
+      summary: Delete Policy
+      operationId: deletePolicy
+      tags:
+      - Policies
+      responses:
+        '204':
+          description: Deleted
+components:
+  schemas:
+    Policy:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        detectors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Detector identifier (e.g. `prompt_attack`, `pii`, `content_moderation`, `unknown_links`).
+              sensitivity:
+                type: string
+                enum:
+                - L1
+                - L2
+                - L3
+                - L4
+                - L5
+                description: Sensitivity threshold (L1 strictest, L5 most permissive).
+              action:
+                type: string
+                enum:
+                - flag
+                - mask
+                - allow
+        created_at:
+          type: string
+          format: date-time
+        modified_at:
+          type: string
+          format: date-time
+    PolicyInput:
+      type: object
+      required:
+      - name
+      - detectors
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        detectors:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              sensitivity:
+                type: string
+              action:
+                type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'Lakera Guard SaaS API key issued from the Lakera platform. Pass as
+
+        `Authorization: Bearer $LAKERA_GUARD_API_KEY`. Self-hosted deployments
+
+        may run without authentication.
+
+        '

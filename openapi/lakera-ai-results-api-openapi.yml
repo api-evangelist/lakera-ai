@@ -1,0 +1,165 @@
+openapi: 3.1.0
+info:
+  title: Lakera Guard Results API
+  description: 'Lakera Guard is an AI-native security platform that screens LLM application
+
+    inputs and outputs for prompt attacks, data leakage, content violations, PII
+
+    exposure, and malicious links. The Guard API exposes a single screening
+
+    endpoint that accepts OpenAI-style chat messages and returns a flagged
+
+    response, plus a results endpoint that returns detector confidence levels
+
+    without making a runtime decision.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Lakera
+    url: https://www.lakera.ai
+    email: support@lakera.ai
+  license:
+    name: Lakera Terms of Service
+    url: https://www.lakera.ai/terms
+servers:
+- url: https://api.lakera.ai/v2
+  description: Lakera Guard SaaS (Global)
+- url: https://api.us-east.lakera.ai/v2
+  description: Lakera Guard SaaS (US East)
+- url: https://api.us-west.lakera.ai/v2
+  description: Lakera Guard SaaS (US West)
+- url: https://api.eu-west.lakera.ai/v2
+  description: Lakera Guard SaaS (EU West)
+- url: https://api.ap.lakera.ai/v2
+  description: Lakera Guard SaaS (Asia Pacific)
+security:
+- BearerAuth: []
+tags:
+- name: Results
+  description: Retrieve detector confidence levels without runtime enforcement.
+paths:
+  /guard/results:
+    post:
+      summary: Get Detector Confidence Results
+      description: 'Returns detector confidence levels (L1 Confident through L5 Unlikely) for
+
+        the supplied content without making a runtime flagging decision and
+
+        without contributing to logged screening activity. Intended for offline
+
+        analysis, threshold tuning, and quality monitoring rather than runtime
+
+        enforcement.
+
+        '
+      operationId: getResults
+      tags:
+      - Results
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResultsRequest'
+      responses:
+        '200':
+          description: Detector results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultsResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    DetectorBreakdown:
+      type: object
+      properties:
+        detector_type:
+          type: string
+          description: Detector category (e.g. `prompt_attack`, `pii`, `content_moderation`).
+          example: prompt_attack
+        detected:
+          type: boolean
+          description: Whether this detector tripped.
+        confidence:
+          type: string
+          enum:
+          - L1
+          - L2
+          - L3
+          - L4
+          - L5
+          description: Confidence level — L1 Confident through L5 Unlikely.
+    ResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectorBreakdown'
+        metadata:
+          type: object
+          properties:
+            request_uuid:
+              type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    Message:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+          description: Role of the message author (OpenAI chat completions format).
+        content:
+          type: string
+          description: Message text to screen.
+    ResultsRequest:
+      type: object
+      required:
+      - messages
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        project_id:
+          type: string
+          description: Project identifier whose assigned policy governs which detectors run.
+  responses:
+    ErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: 'Lakera Guard SaaS API key issued from the Lakera platform. Pass as
+
+        `Authorization: Bearer $LAKERA_GUARD_API_KEY`. Self-hosted deployments
+
+        may run without authentication.
+
+        '
