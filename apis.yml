@@ -1,63 +1,122 @@
 aid: lakera-ai
 url: https://raw.githubusercontent.com/api-evangelist/lakera-ai/refs/heads/main/apis.yml
 apis:
-  - aid: lakera-ai:lakera-guard-api
-    name: Lakera Guard API
-    tags:
-      - AI Security
-      - Artificial Intelligence
-      - Guard
-      - Prompt Injection
-      - PII
-      - Content Moderation
-    humanURL: https://docs.lakera.ai/docs/api/guard
-    properties:
-      - url: https://docs.lakera.ai/docs/api/guard
-        type: Documentation
-      - url: https://docs.lakera.ai/docs/quickstart
-        type: GettingStarted
-      - url: https://docs.lakera.ai/api-reference/lakera-api/guard/screen-content
-        type: Documentation
-      - url: openapi/lakera-guard-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/lakera-guard-request-schema.json
-        type: JSONSchema
-      - url: json-schema/lakera-guard-response-schema.json
-        type: JSONSchema
-      - url: json-structure/lakera-guard-request-structure.json
-        type: JSONStructure
-      - url: json-ld/lakera-ai-context.jsonld
-        type: JSONLD
-      - url: examples/lakera-guard-screen-content-example.json
-        type: Examples
-      - url: examples/lakera-guard-results-example.json
-        type: Examples
-    description: >-
-      Lakera Guard's runtime screening API. POST OpenAI-style chat messages to /v2/guard and receive a `flagged`
-      decision based on the policy assigned to the project, with optional per-detector breakdown and payload-level
-      PII/profanity match locations. Detectors cover prompt attacks, data leakage, PII, content violations, and unknown
-      links across 100+ languages with sub-50ms latency. A second endpoint, /v2/guard/results, returns detector
-      confidence levels (L1–L5) for offline analysis and threshold tuning without contributing to runtime screening
-      logs.
-  - aid: lakera-ai:lakera-platform-api
-    name: Lakera Platform API
-    tags:
-      - AI Security
-      - Administration
-      - Policies
-      - Projects
-      - Enterprise
-    humanURL: https://platform.lakera.ai/docs/api
-    properties:
-      - url: https://platform.lakera.ai/docs/api
-        type: Documentation
-      - url: openapi/lakera-platform-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Lakera Platform API lets Enterprise SaaS customers programmatically manage Lakera Guard policies and projects.
-      Policies select detectors and per-detector sensitivity (L1–L5); projects bind a protected application to a policy
-      and an API key scope. Self-hosted deployments expose additional /policies/lint and /policies/health endpoints plus
-      Kubernetes startupz/readyz/livez probes for in-cluster operation.
+- aid: lakera-ai:lakera-ai-guard-api
+  name: Lakera Guard API
+  description: Screen LLM inputs and outputs for threats.
+  humanURL: https://docs.lakera.ai/docs/api/guard
+  tags:
+  - Guard
+  properties:
+  - type: OpenAPI
+    url: openapi/lakera-ai-guard-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lakera.ai/docs/api/guard
+  - type: GettingStarted
+    url: https://docs.lakera.ai/docs/quickstart
+  - type: Documentation
+    url: https://docs.lakera.ai/api-reference/lakera-api/guard/screen-content
+  - type: JSONSchema
+    url: json-schema/lakera-guard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/lakera-guard-response-schema.json
+  - type: JSONStructure
+    url: json-structure/lakera-guard-request-structure.json
+  - type: JSONLD
+    url: json-ld/lakera-ai-context.jsonld
+  - type: Examples
+    url: examples/lakera-guard-screen-content-example.json
+  - type: Examples
+    url: examples/lakera-guard-results-example.json
+  - type: Documentation
+    url: https://platform.lakera.ai/docs/api
+- aid: lakera-ai:lakera-ai-policies-api
+  name: Lakera Policies API
+  description: Create and manage Lakera Guard policies.
+  humanURL: https://docs.lakera.ai/docs/api/guard
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/lakera-ai-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lakera.ai/docs/api/guard
+  - type: GettingStarted
+    url: https://docs.lakera.ai/docs/quickstart
+  - type: Documentation
+    url: https://docs.lakera.ai/api-reference/lakera-api/guard/screen-content
+  - type: JSONSchema
+    url: json-schema/lakera-guard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/lakera-guard-response-schema.json
+  - type: JSONStructure
+    url: json-structure/lakera-guard-request-structure.json
+  - type: JSONLD
+    url: json-ld/lakera-ai-context.jsonld
+  - type: Examples
+    url: examples/lakera-guard-screen-content-example.json
+  - type: Examples
+    url: examples/lakera-guard-results-example.json
+  - type: Documentation
+    url: https://platform.lakera.ai/docs/api
+- aid: lakera-ai:lakera-ai-projects-api
+  name: Lakera Projects API
+  description: Create and manage projects bound to policies.
+  humanURL: https://docs.lakera.ai/docs/api/guard
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/lakera-ai-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lakera.ai/docs/api/guard
+  - type: GettingStarted
+    url: https://docs.lakera.ai/docs/quickstart
+  - type: Documentation
+    url: https://docs.lakera.ai/api-reference/lakera-api/guard/screen-content
+  - type: JSONSchema
+    url: json-schema/lakera-guard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/lakera-guard-response-schema.json
+  - type: JSONStructure
+    url: json-structure/lakera-guard-request-structure.json
+  - type: JSONLD
+    url: json-ld/lakera-ai-context.jsonld
+  - type: Examples
+    url: examples/lakera-guard-screen-content-example.json
+  - type: Examples
+    url: examples/lakera-guard-results-example.json
+  - type: Documentation
+    url: https://platform.lakera.ai/docs/api
+- aid: lakera-ai:lakera-ai-results-api
+  name: Lakera Results API
+  description: Retrieve detector confidence levels without runtime enforcement.
+  humanURL: https://docs.lakera.ai/docs/api/guard
+  tags:
+  - Results
+  properties:
+  - type: OpenAPI
+    url: openapi/lakera-ai-results-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lakera.ai/docs/api/guard
+  - type: GettingStarted
+    url: https://docs.lakera.ai/docs/quickstart
+  - type: Documentation
+    url: https://docs.lakera.ai/api-reference/lakera-api/guard/screen-content
+  - type: JSONSchema
+    url: json-schema/lakera-guard-request-schema.json
+  - type: JSONSchema
+    url: json-schema/lakera-guard-response-schema.json
+  - type: JSONStructure
+    url: json-structure/lakera-guard-request-structure.json
+  - type: JSONLD
+    url: json-ld/lakera-ai-context.jsonld
+  - type: Examples
+    url: examples/lakera-guard-screen-content-example.json
+  - type: Examples
+    url: examples/lakera-guard-results-example.json
+  - type: Documentation
+    url: https://platform.lakera.ai/docs/api
 name: Lakera
 tags:
   - AI Security
@@ -71,9 +130,24 @@ tags:
   - Content Moderation
   - Check Point
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lakera-ai.png
 access: 3rd-Party
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/lakera/overview
   - type: AgenticAccess
     url: agentic-access/lakera-ai-agentic-access.yml
   - type: TrustCenter
