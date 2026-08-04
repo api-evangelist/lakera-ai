@@ -1,0 +1,497 @@
+{
+  "info": {
+    "_postman_id": "fc00c9cf-1d9f-42f0-9d8d-67acb99d509b",
+    "name": "Lakera Guard Policies API",
+    "description": "Lakera Guard is an AI-native security platform that screens LLM application\ninputs and outputs for prompt attacks, data leakage, content violations, PII\nexposure, and malicious links. The Guard API exposes a single screening\nendpoint that accepts OpenAI-style chat messages and returns a flagged\nresponse, plus a results endpoint that returns detector confidence levels\nwithout making a runtime decision.\n\n\nContact Support:\n Name: Lakera\n Email: support@lakera.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:01:41.000Z",
+    "updatedAt": "2026-07-28T02:01:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fc00c9cf-1d9f-42f0-9d8d-67acb99d509b"
+  },
+  "item": [
+    {
+      "name": "policies",
+      "item": [
+        {
+          "name": "{policy_id}",
+          "item": [
+            {
+              "name": "Get Policy",
+              "id": "a945200a-2737-449d-a112-3abacba4af89",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/policies/:policy_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "policies",
+                    ":policy_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "514b2cfe-bdad-40ee-8c26-ac441a1991c9",
+                      "key": "policy_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0a6dccc3-95b6-4639-9dfe-13daefb3e003",
+                  "name": "Policy",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/policies/:policy_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "policies",
+                        ":policy_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "policy_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detectors\": [\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"L3\",\n      \"action\": \"allow\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"L4\",\n      \"action\": \"mask\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"modified_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:01:42.000Z",
+                  "updatedAt": "2026-07-28T02:01:42.000Z",
+                  "uid": "35240-0a6dccc3-95b6-4639-9dfe-13daefb3e003"
+                }
+              ],
+              "createdAt": "2026-07-28T02:01:42.000Z",
+              "updatedAt": "2026-07-28T02:01:42.000Z",
+              "uid": "35240-a945200a-2737-449d-a112-3abacba4af89"
+            },
+            {
+              "name": "Update Policy",
+              "id": "9a6e0c8c-3282-44c4-abbb-8249254aee6a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"detectors\": [\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/policies/:policy_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "policies",
+                    ":policy_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ec4e9759-98ba-4a33-b87f-8f9690a394f2",
+                      "key": "policy_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "bc92485a-dd6e-4a54-a3a4-e3e4ef0d64af",
+                  "name": "Updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"detectors\": [\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/policies/:policy_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "policies",
+                        ":policy_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "policy_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detectors\": [\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"L3\",\n      \"action\": \"allow\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"L4\",\n      \"action\": \"mask\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"modified_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T02:01:42.000Z",
+                  "updatedAt": "2026-07-28T02:01:42.000Z",
+                  "uid": "35240-bc92485a-dd6e-4a54-a3a4-e3e4ef0d64af"
+                }
+              ],
+              "createdAt": "2026-07-28T02:01:42.000Z",
+              "updatedAt": "2026-07-28T02:01:42.000Z",
+              "uid": "35240-9a6e0c8c-3282-44c4-abbb-8249254aee6a"
+            },
+            {
+              "name": "Delete Policy",
+              "id": "2df552a1-5f36-41c5-a457-4361ea80afc4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/policies/:policy_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "policies",
+                    ":policy_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c36bf8df-e48c-4b99-9423-40a0f48c16a7",
+                      "key": "policy_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "7a8efaaa-a9dd-46fb-ab11-96d5e50d5bd3",
+                  "name": "Deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/policies/:policy_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "policies",
+                        ":policy_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "policy_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:01:42.000Z",
+                  "updatedAt": "2026-07-28T02:01:42.000Z",
+                  "uid": "35240-7a8efaaa-a9dd-46fb-ab11-96d5e50d5bd3"
+                }
+              ],
+              "createdAt": "2026-07-28T02:01:42.000Z",
+              "updatedAt": "2026-07-28T02:01:42.000Z",
+              "uid": "35240-2df552a1-5f36-41c5-a457-4361ea80afc4"
+            }
+          ],
+          "id": "c6d77a4c-b32f-4033-9afa-bcda886423cd",
+          "createdAt": "2026-07-28T02:01:42.000Z",
+          "updatedAt": "2026-07-28T02:01:42.000Z",
+          "uid": "35240-c6d77a4c-b32f-4033-9afa-bcda886423cd"
+        },
+        {
+          "name": "List Policies",
+          "id": "7586da7a-e428-4efe-ba8c-14ec779c51a8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/policies",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "policies"
+              ]
+            },
+            "description": "List policies available to the authenticated organization."
+          },
+          "response": [
+            {
+              "id": "50c02a18-7331-4419-80a0-d68e1d8c3705",
+              "name": "List of policies",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "policies"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"detectors\": [\n      {\n        \"type\": \"<string>\",\n        \"sensitivity\": \"L4\",\n        \"action\": \"flag\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"sensitivity\": \"L4\",\n        \"action\": \"mask\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"detectors\": [\n      {\n        \"type\": \"<string>\",\n        \"sensitivity\": \"L3\",\n        \"action\": \"mask\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"sensitivity\": \"L5\",\n        \"action\": \"mask\"\n      }\n    ],\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\"\n  }\n]",
+              "createdAt": "2026-07-28T02:01:42.000Z",
+              "updatedAt": "2026-07-28T02:01:42.000Z",
+              "uid": "35240-50c02a18-7331-4419-80a0-d68e1d8c3705"
+            }
+          ],
+          "createdAt": "2026-07-28T02:01:42.000Z",
+          "updatedAt": "2026-07-28T02:01:42.000Z",
+          "uid": "35240-7586da7a-e428-4efe-ba8c-14ec779c51a8"
+        },
+        {
+          "name": "Create Policy",
+          "id": "1979ef04-08d9-4a87-b996-58d5c471464d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"detectors\": [\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/policies",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "policies"
+              ]
+            },
+            "description": "Create a new Lakera Guard policy that selects detectors and sensitivity."
+          },
+          "response": [
+            {
+              "id": "f1d560da-0ab8-473e-80c3-7abcde7bec1e",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"detectors\": [\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"<string>\",\n      \"action\": \"<string>\"\n    }\n  ],\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/policies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "policies"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detectors\": [\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"L3\",\n      \"action\": \"allow\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"sensitivity\": \"L4\",\n      \"action\": \"mask\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"modified_at\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T02:01:42.000Z",
+              "updatedAt": "2026-07-28T02:01:42.000Z",
+              "uid": "35240-f1d560da-0ab8-473e-80c3-7abcde7bec1e"
+            }
+          ],
+          "createdAt": "2026-07-28T02:01:42.000Z",
+          "updatedAt": "2026-07-28T02:01:42.000Z",
+          "uid": "35240-1979ef04-08d9-4a87-b996-58d5c471464d"
+        }
+      ],
+      "id": "83049a7c-34a6-44cc-95b3-c0e45adedf69",
+      "createdAt": "2026-07-28T02:01:42.000Z",
+      "updatedAt": "2026-07-28T02:01:42.000Z",
+      "uid": "35240-83049a7c-34a6-44cc-95b3-c0e45adedf69"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lakera.ai/v2"
+    }
+  ]
+}

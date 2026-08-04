@@ -1,0 +1,308 @@
+{
+  "info": {
+    "_postman_id": "5f77c5d5-a152-4396-8149-3c14a768f245",
+    "name": "Lakera Guard API",
+    "description": "Lakera Guard is an AI-native security platform that screens LLM application\ninputs and outputs for prompt attacks, data leakage, content violations, PII\nexposure, and malicious links. The Guard API exposes a single screening\nendpoint that accepts OpenAI-style chat messages and returns a flagged\nresponse, plus a results endpoint that returns detector confidence levels\nwithout making a runtime decision.\n\n\nContact Support:\n Name: Lakera\n Email: support@lakera.ai",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:01:40.000Z",
+    "updatedAt": "2026-07-28T02:01:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5f77c5d5-a152-4396-8149-3c14a768f245"
+  },
+  "item": [
+    {
+      "name": "guard",
+      "item": [
+        {
+          "name": "Screen Content For Threats",
+          "id": "2dbd18bb-9ed2-4009-b528-835e5ca7547f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"project_id\": \"<string>\",\n  \"policy_id\": \"<string>\",\n  \"breakdown\": false,\n  \"payload\": false,\n  \"dev_info\": {}\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/guard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "guard"
+              ]
+            },
+            "description": "Screens the last interaction in an OpenAI-style messages array against\nthe policy associated with the supplied project or policy ID. Returns a\n`flagged` boolean indicating whether any configured detector tripped.\nWhen `breakdown` is true the response includes per-detector results, and\nwhen `payload` is true the response includes character-level match\nlocations for masking sensitive content.\n"
+          },
+          "response": [
+            {
+              "id": "009fd7e4-f306-4dcf-8025-12ea20bc4661",
+              "name": "Screening result",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"project_id\": \"<string>\",\n  \"policy_id\": \"<string>\",\n  \"breakdown\": false,\n  \"payload\": false,\n  \"dev_info\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/guard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "guard"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"flagged\": \"<boolean>\",\n  \"breakdown\": [\n    {\n      \"detector_type\": \"<string>\",\n      \"detected\": \"<boolean>\",\n      \"confidence\": \"L2\"\n    },\n    {\n      \"detector_type\": \"<string>\",\n      \"detected\": \"<boolean>\",\n      \"confidence\": \"L3\"\n    }\n  ],\n  \"payload\": {},\n  \"dev_info\": {},\n  \"metadata\": {\n    \"request_uuid\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:01:41.000Z",
+              "updatedAt": "2026-07-28T02:01:41.000Z",
+              "uid": "35240-009fd7e4-f306-4dcf-8025-12ea20bc4661"
+            },
+            {
+              "id": "6a8b07f4-6b3b-4bbe-b14d-33f99f58218a",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"project_id\": \"<string>\",\n  \"policy_id\": \"<string>\",\n  \"breakdown\": false,\n  \"payload\": false,\n  \"dev_info\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/guard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "guard"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:01:41.000Z",
+              "updatedAt": "2026-07-28T02:01:41.000Z",
+              "uid": "35240-6a8b07f4-6b3b-4bbe-b14d-33f99f58218a"
+            },
+            {
+              "id": "e19bd008-db61-4f5f-97a5-668aa767c792",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"project_id\": \"<string>\",\n  \"policy_id\": \"<string>\",\n  \"breakdown\": false,\n  \"payload\": false,\n  \"dev_info\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/guard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "guard"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:01:41.000Z",
+              "updatedAt": "2026-07-28T02:01:41.000Z",
+              "uid": "35240-e19bd008-db61-4f5f-97a5-668aa767c792"
+            },
+            {
+              "id": "0096f402-0a03-4ccf-90d5-89fbdd1caf1c",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"project_id\": \"<string>\",\n  \"policy_id\": \"<string>\",\n  \"breakdown\": false,\n  \"payload\": false,\n  \"dev_info\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/guard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "guard"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:01:41.000Z",
+              "updatedAt": "2026-07-28T02:01:41.000Z",
+              "uid": "35240-0096f402-0a03-4ccf-90d5-89fbdd1caf1c"
+            }
+          ],
+          "createdAt": "2026-07-28T02:01:41.000Z",
+          "updatedAt": "2026-07-28T02:01:41.000Z",
+          "uid": "35240-2dbd18bb-9ed2-4009-b528-835e5ca7547f"
+        }
+      ],
+      "id": "4d235a84-be34-4dce-9022-610fda27222b",
+      "createdAt": "2026-07-28T02:01:41.000Z",
+      "updatedAt": "2026-07-28T02:01:41.000Z",
+      "uid": "35240-4d235a84-be34-4dce-9022-610fda27222b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lakera.ai/v2"
+    }
+  ]
+}

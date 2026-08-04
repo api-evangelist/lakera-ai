@@ -1,0 +1,20 @@
+{
+  "provider": "lakera-ai",
+  "sources": [
+    "lakera-ai-guard-api-openapi.yml",
+    "lakera-ai-policies-api-openapi.yml",
+    "lakera-ai-projects-api-openapi.yml",
+    "lakera-ai-results-api-openapi.yml"
+  ],
+  "outputs": [
+    "lakera-ai-guard-api-openapi.yml",
+    "lakera-ai-policies-api-openapi.yml",
+    "lakera-ai-projects-api-openapi.yml",
+    "lakera-ai-results-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
