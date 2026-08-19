@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lakera Guard Policies API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lakera.ai/v2/policies"
+          },
+          "docs": "List policies available to the authenticated organization."
+        },
+        {
+          "info": {
+            "name": "Create Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lakera.ai/v2/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Lakera Guard policy that selects detectors and sensitivity."
+        },
+        {
+          "info": {
+            "name": "Get Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lakera.ai/v2/policies/:policy_id",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Policy"
+        },
+        {
+          "info": {
+            "name": "Update Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lakera.ai/v2/policies/:policy_id",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Policy"
+        },
+        {
+          "info": {
+            "name": "Delete Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.lakera.ai/v2/policies/:policy_id",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Policy"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
