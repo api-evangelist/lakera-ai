@@ -64,6 +64,8 @@ apis:
   description: Create and manage projects bound to policies.
   humanURL: https://docs.lakera.ai/docs/api/guard
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
