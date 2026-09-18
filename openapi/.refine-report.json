@@ -1,20 +1,28 @@
 {
   "provider": "lakera-ai",
   "sources": [
-    "lakera-ai-guard-api-openapi.yml",
-    "lakera-ai-policies-api-openapi.yml",
-    "lakera-ai-projects-api-openapi.yml",
-    "lakera-ai-results-api-openapi.yml"
+    "_original/lakera-guard-api-openapi.yml",
+    "_original/lakera-platform-api-openapi.yml"
   ],
   "outputs": [
     "lakera-ai-guard-api-openapi.yml",
+    "lakera-ai-results-api-openapi.yml",
     "lakera-ai-policies-api-openapi.yml",
-    "lakera-ai-projects-api-openapi.yml",
-    "lakera-ai-results-api-openapi.yml"
+    "lakera-ai-projects-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "lakera-guard-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "lakera-platform-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "lakera-ai-guard-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lakera-ai-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lakera-ai-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lakera-ai-results-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

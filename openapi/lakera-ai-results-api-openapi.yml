@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Lakera Guard Results API
   description: 'Lakera Guard is an AI-native security platform that screens LLM application
@@ -11,9 +11,7 @@ info:
 
     response, plus a results endpoint that returns detector confidence levels
 
-    without making a runtime decision.
-
-    '
+    without making a runtime decision.'
   version: 2.0.0
   contact:
     name: Lakera
@@ -50,9 +48,7 @@ paths:
 
         analysis, threshold tuning, and quality monitoring rather than runtime
 
-        enforcement.
-
-        '
+        enforcement.'
       operationId: getResults
       tags:
       - Results
@@ -77,37 +73,6 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
-    DetectorBreakdown:
-      type: object
-      properties:
-        detector_type:
-          type: string
-          description: Detector category (e.g. `prompt_attack`, `pii`, `content_moderation`).
-          example: prompt_attack
-        detected:
-          type: boolean
-          description: Whether this detector tripped.
-        confidence:
-          type: string
-          enum:
-          - L1
-          - L2
-          - L3
-          - L4
-          - L5
-          description: Confidence level — L1 Confident through L5 Unlikely.
-    ResultsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DetectorBreakdown'
-        metadata:
-          type: object
-          properties:
-            request_uuid:
-              type: string
     Error:
       type: object
       properties:
@@ -144,6 +109,37 @@ components:
         project_id:
           type: string
           description: Project identifier whose assigned policy governs which detectors run.
+    DetectorBreakdown:
+      type: object
+      properties:
+        detector_type:
+          type: string
+          description: Detector category (e.g. `prompt_attack`, `pii`, `content_moderation`).
+          example: prompt_attack
+        detected:
+          type: boolean
+          description: Whether this detector tripped.
+        confidence:
+          type: string
+          enum:
+          - L1
+          - L2
+          - L3
+          - L4
+          - L5
+          description: Confidence level — L1 Confident through L5 Unlikely.
+    ResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectorBreakdown'
+        metadata:
+          type: object
+          properties:
+            request_uuid:
+              type: string
   responses:
     ErrorResponse:
       description: Error response
